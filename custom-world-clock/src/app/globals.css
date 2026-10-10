@@ -1,0 +1,542 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@property --clock-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: #10110f;
+}
+
+body {
+  margin: 0;
+  background: #10110f;
+  color: #f5f2e9;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.dashboard {
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% -20%, rgb(66 84 57 / 17%), transparent 55%),
+    #10110f;
+}
+
+.dashboard__content {
+  width: min(100% - 64px, 1152px);
+  margin: 0 auto;
+}
+
+.dashboard__header {
+  padding: 76px 0 42px;
+  text-align: center;
+}
+
+.dashboard__eyebrow,
+.section-kicker {
+  color: #b4b0a2;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.dashboard__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dashboard__live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c7e76b;
+  box-shadow: 0 0 12px rgb(199 231 107 / 70%);
+}
+
+.dashboard__title {
+  margin: 20px 0 14px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(44px, 7vw, 76px);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+}
+
+.dashboard__title span {
+  color: #c7e76b;
+  font-style: italic;
+}
+
+.dashboard__intro {
+  max-width: 410px;
+  margin: 0 auto;
+  color: #99988e;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.add-clock {
+  padding: 25px 28px 20px;
+  border: 1px solid #34362d;
+  border-radius: 14px;
+  background: linear-gradient(130deg, rgb(36 38 32 / 82%), rgb(27 29 25 / 76%));
+  box-shadow: 0 20px 60px rgb(0 0 0 / 12%);
+}
+
+.add-clock__heading,
+.clock-section__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-kicker {
+  margin: 0 0 7px;
+  color: #b0ba8a;
+}
+
+.add-clock h2,
+.clock-section h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+.add-clock__icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid #414437;
+  border-radius: 50%;
+  color: #c7e76b;
+  font-size: 20px;
+}
+
+.add-clock__form {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) minmax(190px, 1.15fr) auto auto;
+  align-items: end;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  color: #b5b4a9;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.field input:not([type="color"]),
+.field select {
+  width: 100%;
+  height: 43px;
+  padding: 0 12px;
+  border: 1px solid #3b3d34;
+  border-radius: 7px;
+  outline: none;
+  background: #191a17;
+  color: #f0eee4;
+  font-size: 13px;
+}
+
+.field input::placeholder {
+  color: #696a61;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #c7e76b;
+  box-shadow: 0 0 0 2px rgb(199 231 107 / 12%);
+}
+
+.color-picker {
+  display: flex;
+  height: 43px;
+  align-items: center;
+  gap: 9px;
+  padding: 0 10px;
+  border: 1px solid #3b3d34;
+  border-radius: 7px;
+  background: #191a17;
+  color: #dedcd2;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+}
+
+.color-picker input {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.color-picker input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.color-picker input::-webkit-color-swatch {
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 4px;
+}
+
+.add-clock__submit {
+  display: inline-flex;
+  height: 43px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 7px;
+  background: #c7e76b;
+  color: #1c2112;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.add-clock__submit:hover {
+  transform: translateY(-1px);
+  background: #d7f485;
+}
+
+.add-clock__submit span {
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.add-clock__hint {
+  margin: 14px 0 0;
+  color: #88887e;
+  font-size: 11px;
+}
+
+.clock-section {
+  margin-top: 52px;
+}
+
+.clock-section__heading {
+  align-items: end;
+  margin-bottom: 18px;
+}
+
+.clock-section__tip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 3px;
+  color: #828279;
+  font-size: 11px;
+}
+
+.clock-section__tip span {
+  color: #c7e76b;
+  font-size: 16px;
+}
+
+.clock-canvas {
+  position: relative;
+  min-height: 448px;
+  width: 100%;
+  border: 1px dashed #292b25;
+  border-radius: 13px;
+  background-image: radial-gradient(#313329 0.7px, transparent 0.7px);
+  background-position: 10px 10px;
+  background-size: 24px 24px;
+
+  /* Enables vertical dragging to expand the canvas */
+  resize: vertical;
+  /* Allows inner scrolling if clocks are dragged out of bounds on mobile */
+  overflow: auto;
+  /* Enables smooth scrolling on touch devices */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 3. Apply the loading progress gradient */
+.clock-card {
+  position: absolute;
+  width: min(350px, calc(100vw - 66px));
+  min-height: 184px;
+  padding: 3px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 26px
+    color-mix(in srgb, var(--clock-accent) 10%, transparent);
+  transition: box-shadow 200ms ease;
+  z-index: 1;
+}
+
+.clock-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+
+  /* Creates a hard-stop gradient that fills up to the current second */
+  background: conic-gradient(
+    var(--clock-accent) 0deg,
+    var(--clock-accent) var(--clock-angle),
+    color-mix(in srgb, var(--clock-accent) 10%, transparent) var(--clock-angle),
+    color-mix(in srgb, var(--clock-accent) 10%, transparent) 360deg
+  );
+
+  /* Smoothly animates the CSS variable as React updates it every second */
+  transition: --clock-angle 1s linear;
+  z-index: -1;
+}
+
+.clock-card:hover {
+  z-index: 2;
+  box-shadow: 0 8px 32px
+    color-mix(in srgb, var(--clock-accent) 20%, transparent);
+}
+
+.clock-card__surface {
+  position: relative;
+  min-height: 182px;
+  height: 100%;
+  padding: 17px 19px 16px;
+  border-radius: 9px;
+  background: linear-gradient(145deg, #20211d, #171815 75%);
+  z-index: 2;
+}
+
+/* Adjust topline to accommodate the new analog clock */
+.clock-card__topline {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.clock-card__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clock-card__drag,
+.clock-card__remove {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #85877a;
+  cursor: grab;
+  font-size: 19px;
+  line-height: 1;
+  touch-action: none;
+}
+
+.clock-card__drag:active {
+  cursor: grabbing;
+}
+
+.clock-card__drag:hover,
+.clock-card__remove:hover {
+  background: #303229;
+  color: #c7e76b;
+}
+
+.clock-card__zone {
+  overflow: hidden;
+  color: #a3a397;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.clock-card__remove {
+  width: 22px;
+  height: 22px;
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.clock-card__name {
+  overflow: hidden;
+  margin: 12px 0 2px;
+  color: #e6e4da;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.clock-card__time {
+  margin: 0;
+  color: #f4f1e9;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: clamp(27px, 3vw, 34px);
+  font-weight: 500;
+  letter-spacing: -0.075em;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.clock-card__date {
+  margin: 5px 0 0;
+  color: #939388;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.clock-canvas__loading {
+  margin: 28px;
+  color: #96958a;
+  font-size: 13px;
+}
+
+.storage-warning {
+  margin: 0 0 12px;
+  color: #fbbf24;
+  font-size: 12px;
+}
+
+.dashboard__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 25px 0 30px;
+  color: #74756b;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+}
+
+@media (max-width: 760px) {
+  .dashboard__content {
+    width: min(100% - 36px, 560px);
+  }
+
+  .dashboard__header {
+    padding-top: 56px;
+  }
+
+  .add-clock {
+    padding: 22px 18px 18px;
+  }
+
+  .add-clock__form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .field--zone {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .clock-card {
+    width: min(350px, calc(100vw - 58px));
+  }
+
+  .clock-section__tip {
+    max-width: 145px;
+    text-align: right;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard__content {
+    width: calc(100% - 28px);
+  }
+
+  .dashboard__header {
+    padding: 46px 0 32px;
+  }
+
+  .dashboard__intro {
+    max-width: 310px;
+    font-size: 13px;
+  }
+
+  .add-clock__form {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 10px;
+  }
+
+  .field--name {
+    grid-column: 1 / -1;
+  }
+
+  .field--zone {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .add-clock__submit {
+    padding: 0 10px;
+    font-size: 11px;
+  }
+
+  .clock-section {
+    margin-top: 38px;
+  }
+
+  .clock-section__heading {
+    align-items: start;
+  }
+
+  .clock-section__tip {
+    max-width: 120px;
+    margin-top: 17px;
+    font-size: 10px;
+  }
+
+  .clock-canvas {
+    min-height: 440px;
+  }
+
+  .clock-card {
+    width: calc(100% - 2px);
+  }
+
+  .dashboard__footer {
+    flex-direction: column;
+    font-size: 8px;
+  }
+}
